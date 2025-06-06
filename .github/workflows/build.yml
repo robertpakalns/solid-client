@@ -1,0 +1,43 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - if: matrix.platform == 'ubuntu-latest' # Linux only
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgtk-3-dev \
+            webkit2gtk-4.0 \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf
+
+      - run: npm ci
+
+      - uses: tauri-apps/tauri-action@v0
+        with:
+          tagName: v${{ github.ref_name }}
+          releaseName: 'Release v${{ github.ref_name }}'
+          releaseDraft: true
+          prerelease: false
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
