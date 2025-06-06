@@ -29,7 +29,12 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
-      - if: matrix.os == 'ubuntu-latest' # Linux only
+      - if: matrix.os == "ubuntu-latest" # Linux only
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - if: matrix.os == "ubuntu-latest" # Linux only
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
@@ -43,21 +48,12 @@ jobs:
           key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-registry-
 
-      - id: cargo-build-cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-build-${{ hashFiles('**/Cargo.toml') }}
-          restore-keys: ${{ runner.os }}-cargo-build-
-
       - run: npm ci
 
       - uses: tauri-apps/tauri-action@v0
         with:
-          tagName: vv__VERSION__
-          releaseName: 'Release vv__VERSION__'
+          tagName: v__VERSION__
+          releaseName: "Release v__VERSION__"
           releaseDraft: true
           prerelease: false
         env:
