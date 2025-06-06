@@ -56,5 +56,6 @@ jobs:
           releaseName: "Release v__VERSION__"
           releaseDraft: true
           prerelease: false
+          args: ${{ matrix.args }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
