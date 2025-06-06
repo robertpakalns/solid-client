@@ -21,7 +21,7 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
-      - if: matrix.platform == 'ubuntu-latest' # Linux only
+      - if: matrix.os == 'ubuntu-latest' # Linux only
         run: |
           sudo apt-get update
           sudo apt-get install -y \
