@@ -29,6 +29,8 @@ jobs:
             webkit2gtk-4.0 \
             libappindicator3-dev \
             librsvg2-dev \
+            libjavascriptcoregtk-4.1-dev \
+            libsoup-3.0-dev \
             patchelf
 
       - run: npm ci
