@@ -39,6 +39,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
+      - if: matrix.os == 'macos-latest' # MacOS only
+        run: |
+          rustup target add aarch64-apple-darwin
+          rustup target add x86_64-apple-darwin
+
       - id: cargo-cache
         uses: actions/cache@v4
         with:
