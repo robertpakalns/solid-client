@@ -55,12 +55,13 @@ jobs:
 
       - run: npm ci
 
-      - uses: tauri-apps/tauri-action@v0
+      - uses: tauri-apps/tauri-action@dev
         with:
           tagName: v__VERSION__
           releaseName: "Release v__VERSION__"
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+          includeUpdaterJson: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -12,18 +12,25 @@ fn toggle_fullscreen(window: Window) {
     window.set_fullscreen(!is_fullscreen).unwrap();
 }
 
+#[tauri::command]
+fn restart(app: tauri::AppHandle) {
+    app.restart();
+}
+
 fn main() {
     discord::drpc_init();
 
     Builder::default()
         .plugin(tauri_plugin_deep_link::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
             if let Some(window) = app.get_webview_window("main") {
                 let _ = window.show();
                 let _ = window.set_focus();
             }
         }))
-        .invoke_handler(generate_handler![toggle_fullscreen])
+        .invoke_handler(generate_handler![toggle_fullscreen, restart])
         .setup(|app| {
             let script = include_str!("../../frontend-dist/script.js");
 

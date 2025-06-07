@@ -26,6 +26,12 @@
           "solid"
         ]
       }
+    },
+    "updater": {
+      "pubkey": "",
+      "endpoints": [
+        "https://github.com/robertpakalns/solid-client/releases/latest/download/latest.json"
+      ]
     }
   },
   "bundle": {
