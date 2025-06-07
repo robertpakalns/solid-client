@@ -1,7 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::{
-    Builder, WebviewUrl, WebviewWindowBuilder, Window, generate_context, generate_handler,
+    Builder, Manager, WebviewUrl, WebviewWindowBuilder, Window, generate_context, generate_handler,
 };
 
 mod discord;
@@ -12,17 +12,18 @@ fn toggle_fullscreen(window: Window) {
     window.set_fullscreen(!is_fullscreen).unwrap();
 }
 
-#[tauri::command]
-fn open_url(url: String) {
-    webbrowser::open(&url).ok();
-}
-
 fn main() {
     discord::drpc_init();
 
     Builder::default()
         .plugin(tauri_plugin_deep_link::init())
-        .invoke_handler(generate_handler![toggle_fullscreen, open_url,])
+        .plugin(tauri_plugin_single_instance::init(|app, _, _| {
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.show();
+                let _ = window.set_focus();
+            }
+        }))
+        .invoke_handler(generate_handler![toggle_fullscreen])
         .setup(|app| {
             let script = include_str!("../../frontend-dist/script.js");
 
