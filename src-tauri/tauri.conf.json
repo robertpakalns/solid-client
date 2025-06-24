@@ -28,7 +28,8 @@
       }
     },
     "updater": {
-      "pubkey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3zmowHw6/JMzpLI9LZ4b20Ou/oz0WeB2xY+SXpVNUUw6aKeIgV/dJpra2j/dLipHX7cc4r1zBpcGFzFYcex9StoZ43vLMQDUmFGQtdxiTdrXJcWAG2UhrF8NpgaaUjELEkIDqowU+NzRp2U1Rlixu2tb8TuG/BDwNGyfrrOVwEO8IYnEAeKpRT+6dSpcXJcWnJZ2OMuieySki+Lf4ZFu48tJCUdjzsYsMhyK9ykf8+Yi/rqW9q4uczBnqv3I5FdWu/TFd/649obDCCyi2OASean/8JlBTzy2vUXYeslbuCOemg9JdbrtJiz+Zq2EEPy1EIuud+9BcQxHX0xxplK5rwIDAQAB",
+      "active": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM2RkZGQURENjg4REQ3REYKUldUZjE0MW8zZnIveGllVVFzWW15YTdVNW1ndmJ4MEFOMlpNclhHSkdjUmk2d0tRYkYwVjJOclQK",
       "endpoints": [
         "https://github.com/robertpakalns/solid-client/releases/latest/download/latest.json"
       ]
@@ -36,6 +37,7 @@
   },
   "bundle": {
     "publisher": "robertpakalns",
+    "createUpdaterArtifacts": true,
     "active": true,
     "targets": "all",
     "icon": [
