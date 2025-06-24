@@ -1,6 +1,5 @@
 [package]
 name = "solid-client"
-version = "0.0.1"
 description = "An unofficial desktop client for Vectaria.io game"
 authors = ["robertpakalns"]
 edition = "2024"

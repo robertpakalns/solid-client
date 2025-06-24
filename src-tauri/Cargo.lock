@@ -3632,7 +3632,7 @@ dependencies = [
 
 [[package]]
 name = "solid-client"
-version = "0.0.1"
+version = "0.0.0"
 dependencies = [
  "discord-rich-presence",
  "dotenvy",
